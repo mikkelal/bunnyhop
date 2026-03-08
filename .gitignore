@@ -6,6 +6,7 @@
 
 # Source code
 !src/**/*.ts
+!.github/workflows/**
 
 # Config files
 !.gitignore

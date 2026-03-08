@@ -1,6 +1,6 @@
 {
    "name": "bunnyhop",
-   "version": "0.0.5",
+   "version": "0.0.6",
    "type": "module",
    "bin": {
       "bunnyhop": "dist/cli/index.js"

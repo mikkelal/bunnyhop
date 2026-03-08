@@ -1,0 +1,10 @@
+{ 
+   "fmt": {
+      "indentWidth": 3,
+      "lineWidth": 300
+   },
+   "nodeModulesDir": "auto",
+   "tasks": {
+       "bunnyhop": "deno -A ./src/cli/index.ts"
+   }
+}

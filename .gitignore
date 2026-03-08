@@ -1,0 +1,29 @@
+# Ignore everything by default
+*
+
+# Allow directories to be traversed
+!*/
+
+# Source code
+!src/**/*.ts
+
+# Config files
+!.gitignore
+!deno.json
+!deno.lock
+!package.json
+!tsconfig.json
+!README.md
+
+# Agent skills
+!.agents/**/*.md
+
+# Re-ignore things that might sneak through
+.DS_Store
+node_modules/
+dist/
+.astro/
+.env
+.env.production
+.idea/
+.playwright-mcp/

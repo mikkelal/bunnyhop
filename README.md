@@ -11,31 +11,41 @@ A CLI tool for deploying static files to [Bunny.net](https://bunny.net) CDN stor
 
 ## Setup
 
-Have these envs in your enviorment:
+Have these env vars set in your enviorment or in a `.env` file (you can change the path of the file by using `--env-file`):
 
 ```env
-BUNNY_STORAGE_ZONE=your-storage-zone
-BUNNY_STORAGE_ACCESS_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+BUNNY_STORAGE_ZONE=
+BUNNY_STORAGE_ACCESS_KEY=
 BUNNY_REGION=
 
-# Required for cache purging (optional if using --skip-purge)
-BUNNY_API_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-BUNNY_PULL_ZONE_URL=https://you-blog.example.com
+# Needed for purgining the CDN, don't need if using --skip-purge
+BUNNY_API_KEY=
+BUNNY_PULL_ZONE_URL=
 ```
 
-All environment variables can also be passed as CLI flags.
+All environment variables can also be passed as CLI flags, you can find the flags in the cli help page: `bunnyhop deploy -h`.
 
 
 ## Usage
 
 ```bash
-npx bunnyhop deploy ./build
+npx bunnyhop deploy ./dist
 ```
 
 ### Or with Deno
 
 ```bash
-dx bunnyhop deploy ./build
+dx bunnyhop deploy ./dist
+```
+
+Or with permisions set:
+
+```bash
+dx \
+  --allow-read=. \
+  --allow-env \
+  --allow-net='*.storage.bunnycdn.com,storage.bunnycdn.com,api.bunny.net' \
+  bunnyhop deploy ./dist
 ```
 
 
@@ -83,6 +93,3 @@ Create a `.deployignore` file in your project root to exclude files from deploym
 .DS_Store
 ```
 
-## License
-
-MIT

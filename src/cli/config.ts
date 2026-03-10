@@ -73,6 +73,11 @@ const purgeStrict = Options.boolean("purge-strict").pipe(
    Options.withDescription("Fail if any changed files could not be purged from the CDN cache."),
 );
 
+const envFile = Options.file("env-file").pipe(
+   Options.optional,
+   Options.withDescription("Path to an .env file to load. Defaults to .env in the current directory."),
+);
+
 const isCi = Options.boolean("ci").pipe(
    Options.withFallbackConfig(Config.boolean("CI")),
    Options.withDescription("Run in CI mode, disabling interactive prompts. (env: CI)"),
@@ -103,6 +108,7 @@ const requestTimeout = Options.integer("request-timeout").pipe(
 const buildPathArg = Args.directory({ name: "build-path" }).pipe(Args.optional);
 
 export const deployCliOptions = {
+   envFile,
    buildDir,
    buildPathArg,
    bunny_storage_region,
@@ -123,6 +129,7 @@ export const deployCliOptions = {
 export type CliConfig = Command.Command.ParseConfig<typeof deployCliOptions>;
 
 export const purgeCliOptions = {
+   envFile,
    paths: Args.text({ name: "paths" }).pipe(Args.repeated),
    apiKey,
    pullZoneUrl,

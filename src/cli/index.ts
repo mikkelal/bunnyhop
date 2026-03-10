@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 import process from "node:process";
+import { parseArgs } from "node:util";
+
+const { values } = parseArgs({ args: process.argv.slice(2), options: { "env-file": { type: "string" } }, strict: false });
+const envFile = typeof values["env-file"] === "string" ? values["env-file"] : undefined;
+try { process.loadEnvFile(envFile); } catch { /* .env not found */ }
 import { Command } from "@effect/cli";
 import { NodeContext, NodeRuntime } from "@effect/platform-node";
 import { Console, Effect } from "effect";

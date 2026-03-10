@@ -27,4 +27,4 @@ jobs:
       - run: npm install -g npm@latest
       - run: deno install
       - run: deno run build
-      - run: npm publish --provenance
+      - run: NODE_AUTH_TOKEN="" npm publish --provenance

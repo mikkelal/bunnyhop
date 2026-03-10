@@ -2,7 +2,7 @@
 import process from "node:process";
 import { Command } from "@effect/cli";
 import { NodeContext, NodeRuntime } from "@effect/platform-node";
-import { Effect } from "effect";
+import { Console, Effect } from "effect";
 import { deployCliOptions, purgeCliOptions, resolveConfig, validateConfig } from "./config.ts";
 import { deploy as deployOrchestrator } from "../deploy/orchestrator.ts";
 import { purgeUrls } from "../bunny/purge.ts";
@@ -83,4 +83,8 @@ const cli = Command.run(app, {
    version: "0.1.0",
 });
 
-cli(process.argv).pipe(Effect.provide(NodeContext.layer), NodeRuntime.runMain);
+cli(process.argv).pipe(
+   Effect.provide(NodeContext.layer),
+   Effect.catchTag("MissingValue", () => Console.log(`\n\x1b[33mSee https://github.com/mikkelal/bunnyhop#readme for setup instructions.\x1b[0m\n`)),
+   NodeRuntime.runMain,
+);

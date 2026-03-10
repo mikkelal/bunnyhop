@@ -4,14 +4,14 @@ A CLI tool for deploying static files to [Bunny.net](https://bunny.net) CDN stor
 
 ## Features
 
-- **Incremental deploys** — only uploads files that have changed (compared by SHA-256 checksum)
+- **Incremental deploys** — only uploads files that have changed
 - **Automatic cache purging** — purges CDN cache for modified files after deploy
-- **`.deployignore` support** — exclude files from deployment using gitignore-style patterns
 - **CI-friendly** — non-interactive mode for CI
+- **`.deployignore` support** — exclude files from deployment using gitignore-style patterns
 
 ## Setup
 
-Have these env vars set in your enviorment or in a `.env` file (you can change the path of the file by using `--env-file`):
+Have these env vars set in your enviorment, or in a `.env` file (you can change the path of the file by using the `--env-file` flag):
 
 ```env
 BUNNY_STORAGE_ZONE=
@@ -23,10 +23,8 @@ BUNNY_API_KEY=
 BUNNY_PULL_ZONE_URL=
 ```
 
-All environment variables can also be passed as CLI flags, you can find the flags in the cli help page: `bunnyhop deploy -h`.
 
-
-## Usage
+# Usage
 
 ```bash
 npx bunnyhop deploy ./dist
@@ -51,11 +49,12 @@ dx \
 
 
 This will:
+1. Read your `.env` file
 1. Scan your local build directory (default: `dist/`)
-2. Compare files against the remote storage zone
-3. Delete files no longer in the build from storage
-4. Upload new and changed files
-5. Purge CDN cache for modified paths
+1. Diff files against the remote storage zone
+1. Delete files no longer in the build from storage
+1. Upload new and changed files
+1. Purge CDN cache for modified paths
 
 #### Options
 
@@ -70,7 +69,7 @@ This will:
 | `--skip-purge` | `BUNNY_SKIP_PURGE` | `false` | Skip CDN cache purging |
 | `--keep-unknown-files` | `BUNNY_KEEP_UNKNOWN_FILES` | `false` | Don't delete remote files missing from build |
 | `--purge-strict` | — | `false` | Fail if any purge requests fail |
-| `--ci` | `CI` | `false` | Disable interactive prompts |
+| `--ci` | `CI` | `false` | CI friendly output from CLI |
 | `--concurrency` | — | `100` | API request concurrency |
 | `--retry-limit` | — | `3` | Retry attempts for failed requests |
 | `--replication-timeout` | — | `10000` | Ms to wait for geo-replication before purging |
@@ -86,7 +85,9 @@ bunnyhop purge /index.html /about/ /css/style.css
 
 ## `.deployignore`
 
-Create a `.deployignore` file in your project root to exclude files from deployment. Uses the same syntax as `.gitignore`:
+Create a `.deployignore` file in your project root to exclude files from deployment. Uses the same syntax as `.gitignore`. 
+
+Example: 
 
 ```
 *.map

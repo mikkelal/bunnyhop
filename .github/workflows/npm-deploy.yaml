@@ -24,7 +24,6 @@ jobs:
           node-version: '25'
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm install -g npm@latest
-      - run: deno install
+      - run: deno install --frozen --quiet
       - run: deno run build
       - run: NODE_AUTH_TOKEN="" npm publish --provenance --access public

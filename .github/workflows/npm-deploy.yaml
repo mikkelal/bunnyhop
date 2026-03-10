@@ -7,7 +7,7 @@ on:
 
 permissions:
   id-token: write  # Required for OIDC
-  contents: read
+  contents: write
 
 jobs:
   publish:
@@ -27,4 +27,4 @@ jobs:
       - run: npm install -g npm@latest
       - run: deno install
       - run: deno run build
-      - run: NODE_AUTH_TOKEN="" npm publish --provenance --access public
+      - run: npm publish --provenance --access public

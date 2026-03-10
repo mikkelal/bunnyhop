@@ -21,9 +21,10 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '25'
           registry-url: 'https://registry.npmjs.org'
 
+      - run: npm install -g npm@latest
       - run: deno install
       - run: deno run build
       - run: npm publish --provenance

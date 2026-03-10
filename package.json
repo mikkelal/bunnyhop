@@ -5,6 +5,10 @@
    "bin": {
       "bunnyhop": "dist/cli/index.js"
    },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/mikkelal/bunnyhop.git"
+   },
    "files": [
       "dist"
    ],

@@ -1,4 +1,4 @@
-# bunnyhop
+# bunnyhop - a CLI for uploading your build to Bunny.net
 
 A CLI tool for deploying static files to [Bunny.net](https://bunny.net) CDN storage with smart incremental uploads and automatic cache purging.
 
@@ -36,15 +36,18 @@ npx bunnyhop deploy ./dist
 dx bunnyhop deploy ./dist
 ```
 
-Or with permisions set:
+Or with permissions set:
 
 ```bash
 dx \
   --allow-read=. \
   --allow-env \
   --allow-net='*.storage.bunnycdn.com,storage.bunnycdn.com,api.bunny.net' \
+  --allow-sys=uid \
   bunnyhop deploy ./dist
 ```
+
+> `--allow-sys=uid` is needed because Deno's `fs.access()` compat layer calls `Deno.uid()` internally.
 
 
 
